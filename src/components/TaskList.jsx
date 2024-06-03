@@ -6,20 +6,32 @@ const TaskList = ({ onTaskDeleted, onTaskUpdated }) => {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const response = await getTasks();
-      setTasks(response.data);
+      try {
+        const response = await getTasks();
+        setTasks(response.data);
+      } catch (error) {
+        console.error("Failed to fetch tasks:", error);
+      }
     };
     fetchTasks();
   }, [onTaskDeleted, onTaskUpdated]);
 
   const handleDelete = async (taskId) => {
-    await deleteTask(taskId);
-    onTaskDeleted();
+    try {
+      await deleteTask(taskId);
+      onTaskDeleted();
+    } catch (error) {
+      console.error("Failed to delete task:", error);
+    }
   };
 
   const handleMarkAsDone = async (taskId) => {
-    await markAsDone(taskId);
-    onTaskUpdated();
+    try {
+      await markAsDone(taskId);
+      onTaskUpdated();
+    } catch (error) {
+      console.error("Failed to mark task as done:", error);
+    }
   };
 
   return (

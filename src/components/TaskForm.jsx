@@ -11,8 +11,12 @@ const TaskForm = ({ onTaskCreated }) => {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const response = await getCategories();
-      setCategories(response.data);
+      try {
+        const response = await getCategories();
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
     };
     fetchCategories();
   }, []);
@@ -20,13 +24,17 @@ const TaskForm = ({ onTaskCreated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newTask = { title, description, deadline, priority, category };
-    await createTask(newTask);
-    onTaskCreated();
-    setTitle("");
-    setDescription("");
-    setDeadline("");
-    setPriority("");
-    setCategory("");
+    try {
+      await createTask(newTask);
+      onTaskCreated();
+      setTitle("");
+      setDescription("");
+      setDeadline("");
+      setPriority("");
+      setCategory("");
+    } catch (error) {
+      console.error("Failed to create task:", error);
+    }
   };
 
   return (
