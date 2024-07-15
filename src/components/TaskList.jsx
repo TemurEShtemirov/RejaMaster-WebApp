@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getTasks, deleteTask, markAsDone } from "../services/api";
+import '../assets/list.css';
 
 const TaskList = ({ onTaskDeleted, onTaskUpdated }) => {
   const [tasks, setTasks] = useState([]);
@@ -35,20 +36,23 @@ const TaskList = ({ onTaskDeleted, onTaskUpdated }) => {
   };
 
   return (
-    <ul>
-      {tasks.map((task) => (
-        <li key={task._id}>
-          {task.title} - {task.description} (Due:{" "}
-          {new Date(task.deadline).toLocaleDateString()}, Priority:{" "}
-          {task.priority}, Category: {task.category}, Completed:{" "}
-          {task.completed.toString()})
-          <button onClick={() => handleMarkAsDone(task._id)}>
-            Mark as Done
-          </button>
-          <button onClick={() => handleDelete(task._id)}>Delete</button>
-        </li>
-      ))}
-    </ul>
+    <div className="container">
+      <h1>The Order of Operations</h1>
+      <ol>
+        {tasks.map((task) => (
+          <li key={task._id}>
+            {task.title} - {task.description} (Due:{" "}
+            {new Date(task.deadline).toLocaleDateString()}, Priority:{" "}
+            {task.priority}, Category: {task.category}, Completed:{" "}
+            {task.completed.toString()})
+            <button onClick={() => handleMarkAsDone(task._id)}>
+              Mark as Done
+            </button>
+            <button onClick={() => handleDelete(task._id)}>Delete</button>
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 };
 

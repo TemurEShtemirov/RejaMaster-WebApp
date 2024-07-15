@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { getCategories, createTask } from "../services/api";
+import '../assets/form.css';
 
 const TaskForm = ({ onTaskCreated }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [deadline, setDeadline] = useState("");
   const [priority, setPriority] = useState("");
-  const [category, setCategory] = useState("");
+  const [categoryName, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const TaskForm = ({ onTaskCreated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newTask = { title, description, deadline, priority, category };
+    const newTask = { title, description, deadline, priority, categoryName };
     try {
       await createTask(newTask);
       onTaskCreated();
@@ -38,47 +39,39 @@ const TaskForm = ({ onTaskCreated }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Title</label>
+    <div className="container">
+      <form onSubmit={handleSubmit}>
+        <p>Task Management</p>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
-        />
-      </div>
-      <div>
-        <label>Description</label>
+          placeholder="Title"
+        /><br />
         <input
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
-        />
-      </div>
-      <div>
-        <label>Deadline</label>
+          placeholder="Description"
+        /><br />
         <input
           type="date"
           value={deadline}
           onChange={(e) => setDeadline(e.target.value)}
           required
-        />
-      </div>
-      <div>
-        <label>Priority</label>
+          placeholder="Deadline"
+        /><br />
         <input
           type="text"
           value={priority}
           onChange={(e) => setPriority(e.target.value)}
           required
-        />
-      </div>
-      <div>
-        <label>Category</label>
+          placeholder="Priority"
+        /><br />
         <select
-          value={category}
+          value={categoryName}
           onChange={(e) => setCategory(e.target.value)}
           required
         >
@@ -90,10 +83,18 @@ const TaskForm = ({ onTaskCreated }) => {
               {cat.name}
             </option>
           ))}
-        </select>
+        </select><br />
+        <button type="submit">Create Task</button>
+      </form>
+
+      <div className="drops">
+        <div className="drop drop-1"></div>
+        <div className="drop drop-2"></div>
+        <div className="drop drop-3"></div>
+        <div className="drop drop-4"></div>
+        <div className="drop drop-5"></div>
       </div>
-      <button type="submit">Create Task</button>
-    </form>
+    </div>
   );
 };
 
