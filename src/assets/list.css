@@ -10,7 +10,6 @@ body {
     display: grid;
     font-size: 1.6rem;
     place-items: center;
-    background: linear-gradient(to right bottom, #ffb88e, #ea5753);
     font-family: Rockwell, "Courier New", Courier, Georgia, Times, "Times New Roman", serif;
 }
 
@@ -21,7 +20,7 @@ body {
     overflow-x: hidden;
     position: relative;
     border-radius: 3rem;
-    background: linear-gradient(to right bottom, rgba(255, 184, 142, 0.44), rgba(255, 255, 255, 0.5));
+    
 }
 
 .container::-webkit-scrollbar {

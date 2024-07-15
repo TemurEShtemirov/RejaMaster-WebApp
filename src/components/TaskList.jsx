@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 import { getTasks, deleteTask, markAsDone } from "../services/api";
 import '../assets/list.css';
 
@@ -37,7 +38,8 @@ const TaskList = ({ onTaskDeleted, onTaskUpdated }) => {
 
   return (
     <div className="container">
-      <h1>The Order of Operations</h1>
+      <h1>List of Tasks</h1>
+      <Link to={"/form"}>Add Task</Link>
       <ol>
         {tasks.map((task) => (
           <li key={task._id}>
@@ -52,6 +54,7 @@ const TaskList = ({ onTaskDeleted, onTaskUpdated }) => {
           </li>
         ))}
       </ol>
+      <Outlet />
     </div>
   );
 };

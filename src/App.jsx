@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 import { useState } from 'react';
+import './assets/main.css'
 
 const App = () => {
 
@@ -28,7 +29,7 @@ const App = () => {
       <Routes>
         <Route path="/form" element={<TaskForm onTaskCreated={handleTaskCreated} />
         } />
-        <Route path="/list" element={<TaskList
+        <Route path="/" element={<TaskList
           onTaskDeleted={handleTaskDeleted}
           onTaskUpdated={handleTaskUpdated}
         />} />
