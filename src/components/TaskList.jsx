@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getTasks, deleteTask, markAsDone } from "../services/api";
 import '../assets/list.css';
 
-const TaskList = ({ onTaskDeleted, onTaskUpdated }) => {
+const TaskList = ({ onTaskDeleted, onTaskUpdated, taskCreated }) => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const TaskList = ({ onTaskDeleted, onTaskUpdated }) => {
       }
     };
     fetchTasks();
-  }, [onTaskDeleted, onTaskUpdated]);
+  }, [onTaskDeleted, onTaskUpdated, taskCreated]);
 
   const handleDelete = async (taskId) => {
     try {
@@ -37,25 +37,28 @@ const TaskList = ({ onTaskDeleted, onTaskUpdated }) => {
   };
 
   return (
-    <div className="container">
-      <h1>List of Tasks</h1>
-      <Link to={"/form"}>Add Task</Link>
-      <ol>
-        {tasks.map((task) => (
-          <li key={task._id}>
-            {task.title} - {task.description} (Due:{" "}
-            {new Date(task.deadline).toLocaleDateString()}, Priority:{" "}
-            {task.priority}, Category: {task.category}, Completed:{" "}
-            {task.completed.toString()})
-            <button onClick={() => handleMarkAsDone(task._id)}>
-              Mark as Done
-            </button>
-            <button onClick={() => handleDelete(task._id)}>Delete</button>
-          </li>
-        ))}
-      </ol>
-      <Outlet />
-    </div>
+    <>
+      <div className="row">
+        <Link className="Link" to="/form">{"<= Add Task"}</Link>
+        <div className="container" style={{ zIndex: -2 }} >
+          <h1>List of Tasks</h1>
+          <ol>
+            {tasks.map((task) => (
+              <li key={task._id}>
+                {task.title} - {task.description} (Due:{" "}
+                {new Date(task.deadline).toLocaleDateString()}, Priority:{" "}
+                {task.priority}, Category: {task.category}, Completed:{" "}
+                {task.completed.toString()})
+                <button onClick={() => handleMarkAsDone(task._id)}>
+                  Mark as Done
+                </button>
+                <button onClick={() => handleDelete(task._id)}>Delete</button>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </>
   );
 };
 

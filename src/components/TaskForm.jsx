@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getCategories, createTask } from "../services/api";
 import '../assets/form.css';
+import { Link } from "react-router-dom";
 
 const TaskForm = ({ onTaskCreated }) => {
   const [title, setTitle] = useState("");
@@ -39,62 +40,57 @@ const TaskForm = ({ onTaskCreated }) => {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <p>Task Management</p>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          placeholder="Title"
-        /><br />
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-          placeholder="Description"
-        /><br />
-        <input
-          type="date"
-          value={deadline}
-          onChange={(e) => setDeadline(e.target.value)}
-          required
-          placeholder="Deadline"
-        /><br />
-        <input
-          type="text"
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-          required
-          placeholder="Priority"
-        /><br />
-        <select
-          value={categoryName}
-          onChange={(e) => setCategory(e.target.value)}
-          required
-        >
-          <option value="" disabled>
-            Select category
-          </option>
-          {categories.map((cat) => (
-            <option key={cat._id} value={cat.name}>
-              {cat.name}
+    <>
+      <Link className="Link2" to="/">Back To List</Link>
+      <div className="container2">
+        <form onSubmit={handleSubmit}>
+          <p>Task Management</p>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            placeholder="Title"
+          /><br />
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+            placeholder="Description"
+          /><br />
+          <input
+            type="date"
+            value={deadline}
+            onChange={(e) => setDeadline(e.target.value)}
+            required
+            placeholder="Deadline"
+          /><br />
+          <input
+            type="text"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+            required
+            placeholder="Priority"
+          /><br />
+          <select
+            value={categoryName}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Select category
             </option>
-          ))}
-        </select><br />
-        <button type="submit">Create Task</button>
-      </form>
-
-      <div className="drops">
-        <div className="drop drop-1"></div>
-        <div className="drop drop-2"></div>
-        <div className="drop drop-3"></div>
-        <div className="drop drop-4"></div>
-        <div className="drop drop-5"></div>
+            {categories.map((cat) => (
+              <option key={cat._id} value={cat.name}>
+                {cat.name}
+              </option>
+            ))}
+          </select><br />
+          <button type="submit">Create Task</button>
+        </form>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -13,14 +13,48 @@ body {
     font-family: Rockwell, "Courier New", Courier, Georgia, Times, "Times New Roman", serif;
 }
 
+.Link {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    text-decoration: none;
+    color: rgba(234, 87, 83, 0.7);
+    z-index: 99;
+    transition: all 1s;
+    width: 60px;
+    height: 10px;
+    border-radius: 15px;
+    border: none;
+    padding: 10px 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    margin-left: 10px;
+}
+
+.Link:hover {
+    animation: AnimLink 1s infinite;
+}
+
+@keyframes AnimLink {
+
+    0%,
+    100% {
+        margin-left: 10px;
+    }
+
+    50% {
+        margin-left: -15px;
+    }
+}
+
 .container {
-    width: 40vw;
+    width: 500px;
     padding: 3rem;
     overflow-y: hidden;
     overflow-x: hidden;
     position: relative;
+    top: -110px;
     border-radius: 3rem;
-    
+
 }
 
 .container::-webkit-scrollbar {
@@ -61,6 +95,7 @@ body {
     margin-bottom: 3rem;
     box-shadow: 0 7px 2rem #ea5753;
     background: rgba(234, 87, 83, 0.7);
+
 }
 
 .container ol {
